@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_personal_diary/Screens/AnalyseSurrounding.dart';
 import 'package:flutter_personal_diary/Screens/BatteryScreen.dart';
 import 'package:flutter_personal_diary/Screens/MessageScreen.dart';
 import 'package:flutter_personal_diary/Screens/PeopleScreen.dart';
@@ -75,6 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
+                else if (items[index] == 'Analyze Surrounding') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AnalyseSurrounding(title: 'Analyse Surrounding'),
+                    ),
+                  );
+                }
+
 
               },
               child: Card(
