@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_personal_diary/Screens/MessageScreen.dart';
 
 import 'ContactScreen.dart';
 
@@ -40,13 +41,22 @@ class _HomeScreenState extends State<HomeScreen> {
             return InkWell(
               onTap: () {
 
+                print(items[index]);
                 if (items[index] == 'Contacts') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ContactScreen(title: 'Contacts',)),
+                    MaterialPageRoute(
+                      builder: (context) => const ContactScreen(title: 'Contacts'),
+                    ),
+                  );
+                } else if (items[index] == 'Messages') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MessageScreen(title: 'Message'),
+                    ),
                   );
                 }
-
               },
               child: Card(
                 color: Colors.blueAccent,
