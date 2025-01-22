@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_personal_diary/Screens/BatteryScreen.dart';
 import 'package:flutter_personal_diary/Screens/MessageScreen.dart';
 import 'package:flutter_personal_diary/Screens/PeopleScreen.dart';
 
@@ -63,6 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const Peoplescreen(title: 'People'),
+                    ),
+                  );
+                }
+                else if (items[index] == 'Battery') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Batteryscreen(title: 'Battery'),
                     ),
                   );
                 }
