@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ContactScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   final String title;
 
@@ -35,12 +37,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           itemCount: items.length,
           itemBuilder: (context, index) {
-            return Card(
-              color: Colors.blueAccent,
-              child: Center(
-                child: Text(
-                  items[index],
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
+            return InkWell(
+              onTap: () {
+
+                if (items[index] == 'Contacts') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ContactScreen(title: 'Contacts',)),
+                  );
+                }
+
+              },
+              child: Card(
+                color: Colors.blueAccent,
+                child: Center(
+                  child: Text(
+                    items[index],
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                  ),
                 ),
               ),
             );
