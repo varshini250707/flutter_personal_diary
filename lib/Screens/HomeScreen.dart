@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<String> items = [
     'Contacts',
     'Messages',
-    'Pepole',
+    'People',
     'Battery',
     'Analyze Surrounding'
   ];
