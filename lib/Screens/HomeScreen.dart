@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_personal_diary/Screens/MessageScreen.dart';
+import 'package:flutter_personal_diary/Screens/PeopleScreen.dart';
 
 import 'ContactScreen.dart';
 
@@ -57,6 +58,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
+                else if (items[index] == 'People') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Peoplescreen(title: 'People'),
+                    ),
+                  );
+                }
+
               },
               child: Card(
                 color: Colors.blueAccent,
