@@ -3,6 +3,7 @@ import 'package:flutter_personal_diary/Screens/AnalyseSurrounding.dart';
 import 'package:flutter_personal_diary/Screens/BatteryScreen.dart';
 import 'package:flutter_personal_diary/Screens/MessageScreen.dart';
 import 'package:flutter_personal_diary/Screens/PeopleScreen.dart';
+import 'package:flutter_personal_diary/screens/SettingScreen.dart';
 
 import 'ContactScreen.dart';
 
@@ -30,6 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Colors.amber,
+        actions: <Widget>[
+          IconButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingScreen(title: 'Settings'),
+                  ),
+                );
+              },
+              icon: Icon(Icons.settings)
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
