@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Batteryscreen(title: 'Battery'),
+                      builder: (context) => const BatteryScreen(title: 'Battery'),
                     ),
                   );
                 }
