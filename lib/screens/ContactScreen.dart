@@ -43,7 +43,7 @@ class _ContactScreenState extends State<ContactScreen> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.limeAccent,
+        backgroundColor: Colors.green,
         bottom:TabBar(
           controller: _tabController,
           tabs: [
