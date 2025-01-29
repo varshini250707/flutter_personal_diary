@@ -17,12 +17,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> items = [
-    'Contacts',
-    'Messages',
-    'People',
-    'Battery',
-    'Analyze Surrounding'
+  final List<Map<String, dynamic>> items = [
+    {'title': 'Contacts', 'icon': Icons.contacts, 'screen': ContactScreen(title: 'Contacts')},
+    {'title': 'Messages', 'icon': Icons.message, 'screen': MessageScreen(title: 'Messages')},
+    {'title': 'People', 'icon': Icons.people, 'screen': Peoplescreen(title: 'People')},
+    {'title': 'Battery', 'icon': Icons.battery_full, 'screen': BatteryScreen(title: 'Battery')},
+    {'title': 'Analyze Surrounding', 'icon': Icons.analytics, 'screen': AnalyseSurrounding(title: 'Analyze Surrounding')},
   ];
 
   @override
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.amber,
         actions: <Widget>[
           IconButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -41,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              icon: Icon(Icons.settings)
-          )
+              icon: Icon(Icons.settings))
         ],
       ),
       body: Padding(
@@ -57,56 +56,32 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-
-                print(items[index]);
-                if (items[index] == 'Contacts') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ContactScreen(title: 'Contacts'),
-                    ),
-                  );
-                } else if (items[index] == 'Messages') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MessageScreen(title: 'Message'),
-                    ),
-                  );
-                }
-                else if (items[index] == 'People') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Peoplescreen(title: 'People'),
-                    ),
-                  );
-                }
-                else if (items[index] == 'Battery') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BatteryScreen(title: 'Battery'),
-                    ),
-                  );
-                }
-                else if (items[index] == 'Analyze Surrounding') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AnalyseSurrounding(title: 'Analyse Surrounding'),
-                    ),
-                  );
-                }
-
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => items[index]['screen'],
+                  ),
+                );
               },
-              child: Card(
-                color: Colors.blueAccent,
-                child: Center(
-                  child: Text(
-                    items[index],
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Card(
+                  color: Colors.transparent,
+                  elevation: 0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(items[index]['icon'], size: 40, color: Colors.white),
+                      SizedBox(height: 10),
+                      Text(
+                        items[index]['title'],
+                        style: const TextStyle(color: Colors.white, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
               ),
