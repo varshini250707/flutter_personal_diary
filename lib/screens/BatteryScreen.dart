@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
- class Batteryscreen extends StatefulWidget {
+ class BatteryScreen extends StatefulWidget {
 
    final String title;
 
-   const Batteryscreen ({super.key,  required this.title });
+   const BatteryScreen ({super.key,  required this.title });
 
    @override
-   State<Batteryscreen> createState() => _BatteryScreenState();
+   State<BatteryScreen> createState() => _BatteryScreenState();
  }
 
- class _BatteryScreenState extends State<Batteryscreen> {
+ class _BatteryScreenState extends State<BatteryScreen> {
    @override
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(
          title: Text(widget.title),
-         backgroundColor: Colors.greenAccent,
+         backgroundColor: Colors.blueGrey,
        ),
        body: Center(
          child: Text(
