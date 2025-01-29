@@ -17,7 +17,7 @@ class _MessageScreenState extends State<MessageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.blueAccent,
       ),
       body: Center(
         child: Text(
