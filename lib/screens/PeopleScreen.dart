@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Peoplescreen extends StatefulWidget {
-
   final String title;
 
   const Peoplescreen({super.key, required this.title});
@@ -14,9 +12,10 @@ class Peoplescreen extends StatefulWidget {
 }
 
 class _PeoplescreenState extends State<Peoplescreen> {
-
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
+  final TextEditingController _nameController = TextEditingController();
+  final Map<String, File> _records = {}; // Stores name-image pairs
 
   // Function to open the bottom sheet
   void _openImagePickerBottomSheet() {
@@ -50,24 +49,102 @@ class _PeoplescreenState extends State<Peoplescreen> {
     );
   }
 
-  Future getImageFromGallery() async {
+  // Function to get an image from the gallery
+  Future<void> getImageFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
+    if (pickedFile != null) {
+      setState(() {
         _imageFile = File(pickedFile.path);
-      }
-    });
+      });
+      _showNameInputDialog(); // Prompt user to enter a name
+    }
   }
 
-  Future getImageFromCamera() async {
+  // Function to get an image from the camera
+  Future<void> getImageFromCamera() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
 
-    setState(() {
-      if (pickedFile != null) {
+    if (pickedFile != null) {
+      setState(() {
         _imageFile = File(pickedFile.path);
-      }
-    });
+      });
+      _showNameInputDialog(); // Prompt user to enter a name
+    }
+  }
+
+  // Function to show a dialog for entering a name
+  void _showNameInputDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Enter Name'),
+          content: TextField(
+            controller: _nameController,
+            decoration: const InputDecoration(hintText: 'Name'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+                _saveRecord(); // Save the record
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Function to save the record (name and image)
+  void _saveRecord() {
+    if (_nameController.text.isNotEmpty && _imageFile != null) {
+      setState(() {
+        _records[_nameController.text] = _imageFile!; // Save the record
+      });
+      _nameController.clear(); // Clear the text field
+      _imageFile = null; // Clear the image
+    }
+  }
+
+  // Function to search for a record by name
+  void _searchRecord() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Search Record'),
+          content: TextField(
+            controller: _nameController,
+            decoration: const InputDecoration(hintText: 'Enter Name'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+                _displayRecord(_nameController.text); // Display the record
+              },
+              child: const Text('Search'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Function to display the searched record
+  void _displayRecord(String name) {
+    if (_records.containsKey(name)) {
+      setState(() {
+        _imageFile = _records[name]; // Set the image to display
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Record not found')),
+      );
+    }
   }
 
   @override
@@ -75,25 +152,30 @@ class _PeoplescreenState extends State<Peoplescreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.deepPurpleAccent
+        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center, // Centers children horizontally
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             OutlinedButton(
-                onPressed: _openImagePickerBottomSheet, // Open bottom sheet
-                child: Text("Add Person")
+              onPressed: _openImagePickerBottomSheet, // Open bottom sheet
+              child: const Text("Add Person"),
             ),
-            SizedBox(height: 20), // Adds spacing between the buttons
+            const SizedBox(height: 20),
             OutlinedButton(
-                onPressed: _openImagePickerBottomSheet, // Open bottom sheet
-                child: Text("Detect Person")
+              onPressed: _searchRecord, // Search for a record
+              child: const Text("Detect Person"),
             ),
+            if (_imageFile != null) // Display the selected image
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Image.file(_imageFile!),
+              ),
           ],
         ),
-      )
+      ),
     );
   }
 }
