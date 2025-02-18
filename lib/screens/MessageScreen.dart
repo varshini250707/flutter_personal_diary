@@ -38,7 +38,6 @@ class _MessageScreenState extends State<MessageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.blueAccent,
       ),
       body: messages.isEmpty
           ? Center(child: CircularProgressIndicator())

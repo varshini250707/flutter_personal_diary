@@ -152,7 +152,6 @@ class _PeoplescreenState extends State<Peoplescreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Center(
         child: Column(
