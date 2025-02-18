@@ -22,7 +22,7 @@ class _ContactScreenState extends State<ContactScreen> with SingleTickerProvider
   final List<Widget> screenList = [
     const MobileContactScreen(title: 'Mobile Contact',),
     const CallLogScreen(title: 'Call Logs'),
-    const DialerScreen(title: 'Dialer'),
+    // const DialerScreen(title: 'Dialer'),
   ];
 
   @override
@@ -53,9 +53,9 @@ class _ContactScreenState extends State<ContactScreen> with SingleTickerProvider
             Tab(
               text:"Call Logs"
             ),
-            Tab(
-                text:"Dialer"
-            )
+            // Tab(
+            //     text:"Dialer"
+            // )
           ],
         ),
       ),
